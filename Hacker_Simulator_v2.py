@@ -1,48 +1,55 @@
-import SF
+import savefile
+import language
 
 
-def expect_input(lst=None):
+# lets type only your chosen variants in given list, or just normal input() if no arguments involved
+def expect_input(lst=None, message=None):
     while True:
         inp = input("\n>>>")
         if not lst:
             return inp
-        elif inp in lst:
+        if inp in lst:
             return inp
 
 
-#  eng, rus
-# TEXT = {
-#     0: ["Hello world", "Привет, мир"],
-#     1: ["Hope you doin' great", "Все у тебя хорошо?"]
-# }
-# language = expect_input("eng", "rus")
-# index = 0 + int(language == "rus")
-# print(TEXT[0][index])
-# print(TEXT[1][index])
+def get_language_dict():
+    languages_dict = language.dict_of_all_languages()
+    possible_inputs = []
+    for key in languages_dict.keys():
+        possible_inputs += str(key)
+        print(key, "->", languages_dict[key])
+    choise = int(expect_input(possible_inputs))
+    return language.extract_language_pack(choise)
+
+
+def text(ind):
+    if type(ind) == str:
+        return TEXT[ind]
+    else:
+        return TEXT[str(ind)]
 
 
 def manage_save_files():
-    #  starting animation
     while True:
-        print("Create new save [1]")
-        print("Load existing save [2]")
+        print(text(0))
+        print(text(1))
 
-        current_save = SF.SaveFile(dict())
+        current_save = savefile.SaveFile(dict())
         if expect_input(["1", "2"]) == "1":
-            print("Choose your save name")
+            print(text(2))
             name = expect_input()
 
-            if SF.save_exists(name):
-                print("This save already exist. Overwrite save? [y/n]")
-                if expect_input(["y", "n"]) == "n":
+            if savefile.save_exists(name):
+                print(text(3))
+                if expect_input([text("yes"), text("no")]) == text("no"):
                     continue
 
             current_save.data["name"] = name
             current_save.data["skill"] = 1
         else:
-            print("Choose your save")
+            print(text(4))
             saves = dict()
-            for i, save_name in enumerate(SF.list_of_saves(), 1):
+            for i, save_name in enumerate(savefile.list_of_saves(), 1):
                 saves[i] = save_name
                 print(save_name, f"[{i}]")
 
@@ -54,4 +61,5 @@ def manage_save_files():
 
 
 if __name__ == "__main__":
+    TEXT = get_language_dict()
     manage_save_files()
