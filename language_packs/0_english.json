@@ -1,0 +1,10 @@
+{
+  "!!!": "There is spoilers down below! Don't change anything, if you are not sure about that!",
+  "!!!2": "\n -- New line mark.",
+  "yes": "yes",
+  "no": "no",
+  "0": "Create new save [1]\nLoad existing save [2]",
+  "1": "Choose your save name",
+  "2": "This save already exist. Overwrite save? [y/n]",
+  "3": "Choose your save"
+}

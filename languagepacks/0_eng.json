@@ -1,9 +1,0 @@
-{
-  "yes": "yes",
-  "no": "no",
-  "0": "Create new save [1]",
-  "1": "Load existing save [2]",
-  "2": "Choose your save name",
-  "3": "This save already exist. Overwrite save? [y/n]",
-  "4": "Choose your save"
-}
